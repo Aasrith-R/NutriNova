@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Welcome to NutriNova{% endblock %}
+{% block content %}
+
+<section class="hero" style="background:#e8f5e9;padding:4rem 2rem;">
+  <div style="max-width:1000px;margin:0 auto;text-align:center;">
+    <h1 style="margin:0 0 1rem;font-size:2.5rem;color:#2e4730;">Smart Calorie Tracker</h1>
+    <p style="margin:0 0 2rem;font-size:1.1rem;color:#4b5563;">Track your meals, set personalized goals, and get AI-powered recommendations effortlessly.</p>
+    <a href="/sign-up" class="btn btn-primary" style="display:inline-block;padding:0.75rem 1.5rem;border-radius:25px;text-decoration:none;font-weight:600;color:#fff;background:#207a42;">Get Started</a>
+    <a href="/calorie" class="btn btn-secondary" style="display:inline-block;padding:0.75rem 1.5rem;border-radius:25px;text-decoration:none;font-weight:600;color:#207a42;border:2px solid #207a42;margin-left:1rem;background:#fff;">Try Tracker</a>
+  </div>
+</section>
+
+<section class="features" style="padding:3rem 2rem;">
+  <div style="max-width:1000px;margin:0 auto;display:flex;flex-wrap:wrap;justify-content:center;gap:2rem;">
+    <div class="feature" style="background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:2rem;width:280px;text-align:center;">
+      <h3 style="margin-bottom:0.5rem;color:#207a42;">Personalized Goals</h3>
+      <p style="margin:0;font-size:0.95rem;color:#4b5563;">Set calorie & macro targets tailored to you.</p>
+    </div>
+    <div class="feature" style="background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:2rem;width:280px;text-align:center;">
+      <h3 style="margin-bottom:0.5rem;color:#207a42;">Quick Logging</h3>
+      <p style="margin:0;font-size:0.95rem;color:#4b5563;">Log meals via barcode or image upload.</p>
+    </div>
+    <div class="feature" style="background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:2rem;width:280px;text-align:center;">
+      <h3 style="margin-bottom:0.5rem;color:#207a42;">AI Recommendations</h3>
+      <p style="margin:0;font-size:0.95rem;color:#4b5563;">Receive smart meal suggestions daily.</p>
+    </div>
+    <div class="feature" style="background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:2rem;width:280px;text-align:center;">
+      <h3 style="margin-bottom:0.5rem;color:#207a42;">Support Resources</h3>
+      <p style="margin:0;font-size:0.95rem;color:#4b5563;">Access guides on wellness & disorders.</p>
+    </div>
+  </div>
+</section>
+
+<footer style="text-align:center;padding:2rem;background:#fff;border-top:1px solid #e2e8f0;">
+  &copy; 2025 NutriNova. All rights reserved.
+</footer>
+{% endblock %}

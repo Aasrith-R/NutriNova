@@ -1,0 +1,125 @@
+{% extends "base3.html" %}
+{% block title %}Upload Barcode{% endblock %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #e8f5e9 0%, #f1f8f5 100%);
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .upload-card {
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+      max-width: 400px;
+      width: 90%;
+      padding: 40px 30px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      animation: fadeIn 0.8s ease;
+    }
+    .upload-card::before {
+      content: '';
+      position: absolute;
+      top: -50px;
+      right: -50px;
+      width: 150px;
+      height: 150px;
+      background: rgba(32, 122, 66, 0.2);
+      border-radius: 50%;
+      animation: pulse 6s infinite ease-in-out;
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 0.3; }
+      50% { transform: scale(1.3); opacity: 0.1; }
+      100% { transform: scale(1); opacity: 0.3; }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    h1 {
+      margin-bottom: 20px;
+      font-size: 1.8rem;
+      color: #207a42;
+      font-weight: 600;
+    }
+    .dropzone {
+      border: 2px dashed #207a42;
+      border-radius: 12px;
+      padding: 30px;
+      cursor: pointer;
+      transition: background-color 0.3s, border-color 0.3s;
+      margin-bottom: 20px;
+      position: relative;
+    }
+    .dropzone:hover {
+      background-color: #f0fcf5;
+      border-color: #14532d;
+    }
+    .dropzone input {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      cursor: pointer;
+    }
+    .btn-upload {
+      display: inline-block;
+      background-color: #207a42;
+      color: white;
+      border: none;
+      border-radius: 25px;
+      padding: 12px 30px;
+      font-size: 1rem;
+      font-weight: 500;
+      transition: background-color 0.3s;
+      text-decoration: none;
+    }
+    .btn-upload:hover {
+      background-color: #14532d;
+    }
+    .file-name {
+      margin-top: 10px;
+      font-size: 0.9rem;
+      color: #4b5563;
+    }
+  </style>
+</head>
+<body>
+  <div class="upload-card">
+    <h1>Upload Barcode Image</h1>
+    <form action="{{ url_for('views.upload') }}" method="post" enctype="multipart/form-data">
+      <label class="dropzone">
+        <span>Drag & Drop or Click to Select</span>
+        <input type="file" name="file" accept="image/*" required onchange="showFileName(event)">
+      </label>
+      <div class="file-name" id="file-name"></div>
+      <button type="submit" class="btn-upload">Upload</button>
+    </form>
+  </div>
+  <script>
+    function showFileName(event) {
+      const input = event.target;
+      const name = input.files[0]?.name || '';
+      document.getElementById('file-name').textContent = name;
+    }
+  </script>
+</body>
+</html>
+{% endblock %}

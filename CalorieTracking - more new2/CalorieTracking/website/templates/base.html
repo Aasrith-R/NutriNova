@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Google Font: Poppins -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <link
+    rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    crossorigin="anonymous"
+  />
+  <style>
+    /* Global font update */
+    body {
+      font-family: 'Poppins', sans-serif;
+    }
+    /* Navbar container */
+    .navbar-custom {
+      background-color: #207a42;
+      padding: 0.5rem 1rem;
+    }
+    /* Brand styling */
+    .navbar-custom .navbar-brand {
+      color: #ffffff;
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+    .navbar-custom .navbar-brand:hover {
+      color: #d4f1cf;
+    }
+    /* Nav links styling */
+    .navbar-custom .nav-link {
+      color: #e8f5e9;
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      font-weight: 500;
+      transition: background-color 0.2s, color 0.2s;
+    }
+    .navbar-custom .nav-link:hover,
+    .navbar-custom .nav-link.active {
+      background-color: rgba(255,255,255,0.1);
+      color: #ffffff;
+      border-radius: 0.25rem;
+    }
+    /* Button styling */
+    .btn-custom {
+      background-color: #ffffff;
+      color: #207a42;
+      border-radius: 20px;
+      padding: 0.4rem 1rem;
+      font-weight: 500;
+      transition: background-color 0.3s;
+    }
+    .btn-custom:hover {
+      background-color: #e8f5e9;
+      color: #125c2e;
+    }
+    /* Space out adjacent buttons */
+    .navbar-custom .btn-custom + .btn-custom {
+      margin-left: 0.75rem;
+    }
+    /* Toggler icon styling */
+    .navbar-toggler {
+      border: none;
+      outline: none;
+    }
+    .navbar-toggler-icon {
+      width: 1.5rem;
+      height: 1.5rem;
+      background-image: url('data:image/svg+xml;charset=utf8,<svg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"><path stroke="rgba(255,255,255,0.8)" stroke-width="2" stroke-linecap="round" d="M4 7h22M4 15h22M4 23h22"/></svg>');
+    }
+  </style>
+  <title>{% block title %}Home{% endblock %}</title>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-custom fixed-top">
+    <a class="navbar-brand" href="/home">NutriNova</a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-toggle="collapse"
+      data-target="#navbarNav"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item"><a class="nav-link" href="/home">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="/airecommendations">AI Recs</a></li>
+        <li class="nav-item"><a class="nav-link" href="/calorie">Tracker</a></li>
+        <li class="nav-item"><a class="nav-link" href="/eatingdisorders">Disorders</a></li>
+        <li class="nav-item"><a class="nav-link" href="/about">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="/user_chat">Chat</a></li>
+        <li class="nav-item"><a class="nav-link" href="/indo">Scanner</a></li>
+      </ul>
+      <a class="btn btn-custom" id="login" href="/login">Login</a>
+      <a class="btn btn-custom" id="dkey" href="/dkey">Dietitan Login</a>
+      <a class="btn btn-custom" id="signUp" href="/sign-up">Sign Up</a>
+    </div>
+  </nav>
+
+  <div style="padding-top:70px;">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div
+            class="alert alert-{{ 'danger' if category=='error' else 'success' }} alert-dismissible fade show"
+            role="alert"
+          >
+            {{ message }}
+            <button type="button" class="close" data-dismiss="alert">
+              <span>&times;</span>
+            </button>
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+  </div>
+
+  <div class="container mt-4">
+    {% block content %}{% endblock %}
+  </div>
+
+  <script
+    src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    crossorigin="anonymous"
+  ></script>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"
+    crossorigin="anonymous"
+  ></script>
+  <script
+    src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    crossorigin="anonymous"
+  ></script>
+
+  {% block javascript %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,132 @@
+{% extends "base3.html" %}
+{% block title %}Eating Disorders{% endblock %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(to right, #e8f5e9, #f1f8f5);
+      margin: 0;
+      padding: 0;
+      color: #2e4730;
+    }
+    .card {
+      max-width: 1000px;
+      margin: 40px auto;
+      background-color: white;
+      border-radius: 16px;
+      padding: 30px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+      animation: fadeIn 1s ease;
+      position: relative;
+    }
+    h1 {
+      color: #207a42;
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 2rem;
+    }
+    .section {
+      margin-bottom: 30px;
+    }
+    .section h2 {
+      font-size: 1.4rem;
+      color: #14532d;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+    }
+    .section h2 i {
+      margin-right: 8px;
+      color: #58ad27;
+    }
+    .section ul {
+      list-style: none;
+      padding: 0;
+    }
+    .section ul li {
+      margin-bottom: 8px;
+      line-height: 1.6;
+      position: relative;
+      padding-left: 24px;
+    }
+    .section ul li::before {
+      content: '\f0f3'; /* FontAwesome bullet icon */
+      font-family: "Font Awesome 5 Free";
+      font-weight: 900;
+      position: absolute;
+      left: 0;
+      color: #58ad27;
+    }
+    .resources {
+      text-align: center;
+      margin-top: 20px;
+    }
+    .resources a {
+      display: inline-block;
+      margin: 8px 10px;
+      text-decoration: none;
+      color: white;
+      background-color: #207a42;
+      padding: 10px 18px;
+      border-radius: 8px;
+      transition: background-color 0.3s;
+    }
+    .resources a:hover {
+      background-color: #14532d;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1><i class="fas fa-heartbeat"></i> Eating Disorders Overview</h1>
+
+    <div class="section">
+      <h2><i class="fas fa-user-slash"></i>Anorexia</h2>
+      <ul>
+        <li>Serious illness, not a lifestyle choice, involving restricted eating.</li>
+        <li><strong>Common Ages:</strong> 10–20</li>
+        <li><strong>Signs:</strong> Skipping meals, depression, dizziness</li>
+        <li><strong>Symptoms:</strong> Starvation, emotional distress, physical decline</li>
+        <li><strong>Effects:</strong> Extreme weight loss, low blood counts, dehydration</li>
+        <li><strong>Treatment:</strong> Therapy, supervised weight restoration</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2><i class="fas fa-exclamation-triangle"></i>Bulimia Nervosa</h2>
+      <ul>
+        <li>Binge eating followed by purging or misuse of laxatives.</li>
+        <li><strong>Effects:</strong> Electrolyte imbalance, gastrointestinal issues</li>
+        <li><strong>Signs:</strong> Frequent bathroom visits after meals, swollen cheeks</li>
+        <li><strong>Treatment:</strong> Counseling, nutritional education, medication</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2><i class="fas fa-drumstick-bite"></i>Binge Eating Disorder</h2>
+      <ul>
+        <li>Loss of control over eating large quantities of food.</li>
+        <li><strong>Common Ages:</strong> 20–80</li>
+        <li><strong>Signs:</strong> Eating in secret, distress over bingeing episodes</li>
+        <li><strong>Treatment Tips:</strong> Meal planning, therapy, support groups</li>
+      </ul>
+    </div>
+
+    <div class="resources">
+      <p>Learn more with trusted resources:</p>
+      <a href="https://www.nami.org/About-Mental-Illness/Mental-Health-Conditions/Eating-Disorders" target="_blank">NAMI</a>
+      <a href="https://www.nimh.nih.gov/health/topics/eating-disorders" target="_blank">NIH</a>
+      <a href="https://www.samhsa.gov/mental-health/eating-disorders" target="_blank">SAMHSA</a>
+    </div>
+  </div>
+</body>
+</html>
+{% endblock %}

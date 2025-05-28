@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flask-SocketIO Example</title>
+    <script src="https://cdn.socket.io/4.6.0/socket.io.min.js" integrity="sha384-c79GN5VsunZvi+Q/WObgk2in0CbZsHnjEqvFxC5DxHn9lTfNce2WW6h2pH6u/kF+" crossorigin="anonymous"></script>
+    <link
+    rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+    crossorigin="anonymous"
+  />
+  <link
+    rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    crossorigin="anonymous"
+  />
+    <style>
+        .navbar-custom {
+            background-color: green;
+            font-family: Arial, sans-serif;
+        }
+        .navbar-custom .nav-link {
+            color: white;
+        }
+        .navbar-custom .nav-link:hover {
+            color: lightgray;
+        }
+        .btn-custom {
+            background-color: white;
+            color: darkgreen;
+            border-radius: 20px;
+            margin-left: 10px;
+        }
+        .btn-custom:hover {
+            background-color: lightgray;
+            color: darkgreen;
+        }
+        body {
+            background-color: transparent;
+            margin: 0;
+        }
+        #content-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: calc(100vh - 56px); /* Subtract the height of the navbar */
+            background: linear-gradient(to right, #3e9149, #4e8f8f);
+        }
+        #chat {
+            width: 40%;
+            max-width: 500px;
+            background-color: white;
+            border: 2px solid #45aa6e;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        #chat input {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-top: 10px;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+            transition: border-color 0.3s;
+        }
+        #chat input:focus {
+            border-color: #448e5b;
+        }
+        ul {
+            height: 300px;
+            margin: 0;
+            padding: 10px;
+            overflow-y: auto;
+            border-bottom: 1px solid #ced4da;
+        }
+        li {
+            list-style: none;
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #f1f1f1;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        li:hover {
+            background-color: #e0e0e0;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-custom">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbar">
+            <div class="navbar-nav">
+              <a class="nav-item nav-link" id="index2" href="/index2">Client Logs</a>
+              <a class="nav-item nav-link" id="dkey2" href="/dkey2">Client Chat</a>
+            </div>
+            <div class="ml-auto">
+              <a class="btn btn-custom" id="logout" href="/logout">Logout</a>
+            </div>
+    </nav>
+    <div id="content-wrapper">
+        <div id="chat">
+            <ul id="chat-messages">
+                <!-- Messages will be dynamically added here -->
+            </ul>
+            <input type="text" id="message" placeholder="Enter a Message">
+        </div>
+    </div>
+    <script>
+        const socket = io();
+
+        let role = '';
+
+        if (window.location.pathname === '/user_chat') {
+            role = 'Aasrith';
+        } else if (window.location.pathname === '/dkey2') {
+            role = 'Dietitan';
+        }
+
+        socket.connect();
+
+        socket.on("connect", function() {
+            console.log("Connected to server");
+            socket.emit("user_join", role);
+        });
+
+        socket.on("chat", function(data) {
+            console.log("Received chat message:", data);
+            displayMessage(data.username, data.message, data.timestamp);
+        });
+
+        function displayMessage(username, message, timestamp) {
+            let ul = document.getElementById("chat-messages");
+            let li = document.createElement("li");
+            li.textContent = `${username}: ${message} (${timestamp})`;
+            ul.appendChild(li);
+            ul.scrollTop = ul.scrollHeight;
+        }
+
+        document.getElementById("message").addEventListener("keyup", function (event) {
+            if (event.key === "Enter") {
+                let message = document.getElementById("message").value;
+                socket.emit("new_message", message);
+                document.getElementById("message").value = "";
+            }
+        });
+    </script>
+</body>
+</html>

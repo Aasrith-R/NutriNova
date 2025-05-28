@@ -1,0 +1,130 @@
+{% extends "base.html" %}
+{% block title %}Calorie Tracker{% endblock %}
+{% block content %}
+
+<style>
+  h2 {
+    font-size: 1.5em;
+    text-align: right;
+    color: darkgreen;
+  }
+
+  p{
+    font-size: 1.1em;
+    text-align: right;
+    color:darkgreen;
+    font-weight: bold;
+  }
+  h1, label {
+      color: darkgreen;
+  }
+  .form-control {
+      border-radius: 10px;
+      border: 2px solid darkgreen;
+  }
+  .btn-primary {
+      background-color: darkgreen;
+      color: white;
+      border: none;
+  }
+  .btn-primary:hover {
+      background-color: green;
+  }
+</style>
+
+<div class="Remaining Target Calories">
+  <h2>Remaining Target Calories: </h2>
+  <p id="target-calories">{{TARGETCALORIES3}} calories</p>
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+      <div class="col-md-6">
+        <h1>Calorie Tracker</h1>
+        <form method="POST">
+          <div class="form-group">
+            <label for="food">Food:</label>
+            <textarea name="food" id="food" class="form-control"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="calories">Calories:</label>
+            <textarea name="calories" id="calories" class="form-control"></textarea>
+          </div>
+          <br>
+          <div class="text-center">
+            <button type="submit" class="btn btn-primary">Log calories</button>
+          </div>
+        </form>
+      </div>
+  
+      <div class="col-md-6">
+        <ul class="list-group list-group-flush" >
+          {% for note in user.notes %}
+            <li class="list-group-item">
+              {{ note.data }}
+              <form method="POST" action="/delete-note">
+                <input type="hidden" name="note_id" value="{{ note.id }}">
+                <button type="submit" name="deletebutton">Delete Note</button>
+              </form>
+            </li>
+          {% endfor %}
+        </ul>
+  
+        <form method="POST" action="/submit-form">
+          <input type="hidden" name="timezoneOffset" id="timezoneOffsetInput">
+          </form>
+      </div>
+    </div>
+  </div>
+
+
+  
+  <script>
+    var timezoneOffset = new Date().getTimezoneOffset();
+  
+    // Send the timezone offset to the server
+    // Example: Include it in a form submission
+    document.getElementById("timezoneOffsetInput").value = timezoneOffset;
+  
+    document.getElementById('delete-button').addEventListener('click', function() {
+      var noteId = document.getElementById('note_id').value;
+  
+      // Send a POST request to delete the note
+      fetch('/delete-note', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded' // Specify form data content type
+        },
+        body: 'note_id=' + encodeURIComponent(noteId) // Serialize form data manually
+      })
+      .then(response => {
+        if (response.ok) {
+          // Optionally, you can update the UI to reflect the deletion
+          alert('Note deleted successfully');
+          document.getElementById('note_' + noteId).remove();
+        } else {
+          alert('Failed to delete note');
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+    });
+    
+    function updateTargetCalories() {
+        fetch('/get_target_calories')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('target-calories').textContent = data.target_calories + ' calories';
+            })
+            .catch(error => console.error('Error fetching target calories:', error));
+    }
+
+    // Update target calories every 5 seconds
+    setInterval(updateTargetCalories, 5000);
+
+    // Initial fetch when the page loads
+    document.addEventListener('DOMContentLoaded', updateTargetCalories);
+
+  </script>
+{% endblock %}

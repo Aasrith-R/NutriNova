@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Information</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .navbar {
+    background-color: green; /* Green background */
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+}
+
+.nav-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-grow: 1;
+}
+
+        .nav-item {
+            margin-right: 5px;
+        }
+        .nav-item a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+        .nav-item a:hover {
+            background-color: #45a049;
+        }
+        .button-container {
+            display: flex;
+            align-items: center;
+            margin-left: auto;
+        }
+        .nav-button {
+            background-color: white;
+            color: green;
+            border-radius: 25px;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+            margin-left: 5px;
+        }
+        .nav-button:hover {
+            background-color: #c9d3c9;
+            color: green;
+        }
+   
+        .container {
+            max-width: 800px; /* Adjusted for larger content */
+            margin: 20px auto; /* Centering the container with auto margin */
+        }
+        .card {
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: #ffffff;
+        }
+        .btn-upload {
+            background-color: #28a745;
+            color: white;
+            border-radius: 25px;
+            transition: background-color 0.3s;
+        }
+        .btn-upload:hover {
+            background-color: #218838;
+        }
+        .form-control-file {
+            border-radius: 5px;
+            padding: 10px;
+            border: 1px solid #ced4da;
+            width: 100%;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        .content-wrapp {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: calc(100vh - 56px); /* Subtract the height of the navbar */
+            background: linear-gradient(to right, #3e9149, #4e8f8f);
+
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <ul class="nav-list">
+            <li class="nav-item"><a id="Introduction" href="/home">Home</a></li>
+            <li class="nav-item"><a id="airecommendations" href="/airecommendations">AI Recommendations</a></li>
+            <li class="nav-item"><a id="calories" href="/calorie">Calories</a></li>
+            <li class="nav-item"><a id="eating-disorders" href="/eatingdisorders">Eating Disorders</a></li>
+            <li class="nav-item"><a id="about" href="/about">About</a></li>
+            <li class="nav-item"><a id="calendar" href="/user_chat">Dietitian Chat</a></li>
+            <li class="nav-item"><a id="indo" href="/Indo">Barcode Scanner</a></li>
+
+        </ul>
+        <div class="button-container">
+            <a href="/logout" class="nav-button">Log Out</a>
+        </div>
+    </nav>
+    <div class="content-wrapp">
+    <div class="container">
+        <div class="card">
+            <h1 class="text-center">Food Information</h1>
+            {% if food_info.error %}
+                <p>{{ food_info.error }}</p>
+            {% else %}
+                <p><strong>Name:</strong> {{ food_info.name }}</p>
+                <p><strong>Calories:</strong> {{ food_info.calories }}</p>
+                <p><strong>Carbs:</strong> {{ food_info.carbs }}</p>
+                <p><strong>Protein:</strong> {{ food_info.protein }}</p>
+                <p><strong>Fat:</strong> {{ food_info.fat }}</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+</html>

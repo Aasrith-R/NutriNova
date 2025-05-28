@@ -1,0 +1,199 @@
+{% extends "base3.html" %}
+{% block title %}AI Recommendations{% endblock %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(to right, #e8f5e9, #f1f8f5);
+      margin: 0;
+      padding: 0;
+      color: #2e4730;
+      overflow-x: hidden;
+    }
+
+    .page {
+      display: flex;
+      flex-direction: row;
+      max-width: 1200px;
+      margin: 40px auto;
+      gap: 30px;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    .left-panel, .right-panel {
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
+      padding: 24px;
+    }
+
+    .left-panel {
+      width: 30%;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .right-panel {
+      flex-grow: 1;
+      padding-left: 50px;
+    }
+
+    .task-box {
+      background-color: #ecfdf5;
+      border: 1px solid #b7e4c7;
+      border-radius: 12px;
+      padding: 16px;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      animation: slideIn 0.7s ease;
+    }
+
+    .cal-box {
+      background-color: #f0fdf4;
+      padding: 12px 18px;
+      border-radius: 12px;
+      border: 1px solid #d2ead8;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 500;
+      margin-bottom: 10px;
+      animation: scaleIn 0.6s ease;
+    }
+
+    h2 {
+      font-size: 1.6rem;
+      color: #207a42;
+      margin-bottom: 10px;
+    }
+
+    .timeline-entry {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 25px;
+      animation: riseIn 0.5s ease forwards;
+      opacity: 0;
+    }
+
+    .timeline-marker {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background-color: #207a42;
+      margin-right: 15px;
+      margin-top: 6px;
+      flex-shrink: 0;
+    }
+
+    .timeline-content {
+      flex-grow: 1;
+    }
+
+    .time {
+      font-weight: bold;
+      font-size: 1rem;
+      margin-bottom: 5px;
+      color: #207a42;
+    }
+
+    .meal {
+      font-size: 0.95rem;
+    }
+
+    /* === Animations === */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateX(-20px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    @keyframes scaleIn {
+      from { transform: scale(0.95); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    @keyframes riseIn {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Background element */
+    body::after {
+      content: '';
+      position: fixed;
+      top: -150px;
+      right: -150px;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle at center, #c8facc 0%, transparent 70%);
+      z-index: 0;
+      animation: pulse 8s infinite alternate ease-in-out;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 0.3; }
+      100% { transform: scale(1.2); opacity: 0.5; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <!-- LEFT: Static Card Info -->
+    <div class="left-panel">
+      <div>
+        <h2>Form Note:</h2>
+        <div class="task-box">{{ existing_note }}</div>
+      </div>
+      <div>
+        <h2>Calorie Recommendations</h2>
+        <div class="cal-box"><span>{{ existing_nots }}</span><span>Maintain</span></div>
+        <div class="cal-box"><span>{{ existing_nots2 }}</span><span>Lose 1 lb/wk</span></div>
+        <div class="cal-box"><span>{{ existing_nots3 }}</span><span>Gain 1 lb/wk</span></div>
+      </div>
+    </div>
+
+    <!-- RIGHT: Timeline UI -->
+    <div class="right-panel">
+      <h2>Meal Planner</h2>
+      <div class="timeline-entry" style="animation-delay: 0s">
+        <div class="timeline-marker"></div>
+        <div class="timeline-content">
+          <div class="time">8:00 AM</div>
+          <div class="meal">{{ disorder_meals1 }}</div>
+        </div>
+      </div>
+      <div class="timeline-entry" style="animation-delay: 0.1s">
+        <div class="timeline-marker"></div>
+        <div class="timeline-content">
+          <div class="time">1:00 PM</div>
+          <div class="meal">{{ disorder_meals2 }}</div>
+        </div>
+      </div>
+      <div class="timeline-entry" style="animation-delay: 0.2s">
+        <div class="timeline-marker"></div>
+        <div class="timeline-content">
+          <div class="time">6:00 PM</div>
+          <div class="meal">{{ disorder_meals3 }}</div>
+        </div>
+      </div>
+      <div class="timeline-entry" style="animation-delay: 0.3s">
+        <div class="timeline-marker"></div>
+        <div class="timeline-content">
+          <div class="time">8:00 PM</div>
+          <div class="meal">{{ existing_notess }}</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>
+{% endblock %}

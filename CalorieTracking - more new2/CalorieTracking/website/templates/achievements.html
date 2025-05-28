@@ -1,0 +1,63 @@
+{% extends "base3.html" %}
+{% block title %}Achievements{% endblock %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Achievements </title>
+  <style>
+    h1 {
+      font-size: 1.5em;
+      text-align: center;
+    }
+    .achievement {
+      margin: 1rem 0;
+      padding: 1rem;
+      border: 1px solid #ddd;
+      border-radius: 35px;
+      background-color: darkgreen;
+    }
+    .achievement h2 {
+      font-size: 1.2em;
+      margin-top: 0;
+      text-align: center;
+      color: white;
+    }
+    .achievement p {
+      margin: 0.5rem 0;
+      text-align: center;
+      color: white;
+    }
+    .achievements{
+      margin: 1rem 0;
+      padding: 1rem;
+      border: 1px solid #ddd;
+      border-radius: 35px;
+      background-color: darkgreen;
+    }
+    .achievements h2{
+      font-size: 1.2em;
+      margin-top: 0;
+      text-align: center;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <h1>This is where you recieve achievements for various milestones!</h1>
+  <div class="achievement"> 
+    <h2>Achievement Unlocked! You logged into NutriNova! You are now part of the mission. ✅</h2>
+    <p>To unlock the main achievement of NutriNova, meet your calorie goals!!!</p>
+  </div>
+  <div class="achievements"> <!--This will likely only be a part of the video and not the final build-->
+    <h2>Achievement Unlocked! You are on 🔥🔥🔥</h2>
+    <h2>Congratulations on achieving your first calorie milestone! You have successfully logged your calories everyday for a month!
+    </h2>
+    </div>
+</body>
+</html>
+
+{% endblock %}

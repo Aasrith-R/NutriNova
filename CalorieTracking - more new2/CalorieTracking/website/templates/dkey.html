@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block title %}Dietitan Login{% endblock %}
+
+{% block content %}
+<style>
+  body {
+    background: linear-gradient(to right, #3e9149, #4e8f8f);
+    color: white;
+  }
+  .login-container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 400px;
+    margin: auto;
+    color: black;
+  }
+  .btn-primary {
+    background-color: #28a745;
+    color: white;
+    border-radius: 20px;
+  }
+  .btn-primary:hover {
+    background-color: #218838;
+  }
+  h3 {
+    text-align: center;
+    color: white;
+  }
+</style>
+
+<h3>Dietitan Login</h3>
+<div class="login-container">
+  <form method="POST">
+    <div class="form-group">
+      <label for="dkey">Dietitian Key</label>
+      <input
+        type="dkey"
+        class="form-control"
+        id="dkey"
+        name="dkey"
+        placeholder="Enter Dietitian Key"
+      />
+    </div>
+    <br />
+    <button type="submit" class="btn btn-primary"> Dietitian KeyLogin</button>
+  </form>
+</div>
+{% endblock %}

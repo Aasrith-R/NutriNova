@@ -1,0 +1,280 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+	<link href="https://fonts.googleapis.com/css?family=Oswald|Ubuntu:400,700" rel="stylesheet">
+
+	<link rel="stylesheet" href="{{ url_for('static', filename='bs/css/united.min.css') }}" />
+</head>
+<style>
+    .navbar-custom {
+background-color: green;
+font-family: Arial, sans-serif;
+}
+.navbar-custom .nav-link {
+color: white;
+}
+.navbar-custom .nav-link:hover {
+color: lightgray;
+}
+.btn-custom {
+background-color: white;
+color: darkgreen;
+border-radius: 20px;
+margin-left: 10px;
+}
+
+.btn-custom:hover {
+background-color: lightgray;
+color: darkgreen;
+}
+#wrapper {
+}
+
+#homeJumbo {
+position: relative;
+min-height: 180px;
+background: rgba(44, 62, 80, .8);
+background-image: url('./img/bg.jpg');
+background-size: cover;
+background-repeat: no-repeat;
+border-bottom: 2px solid rgba(44, 62, 80, .8);
+box-shadow: 7px 1px 2px 2px rgba(44, 62, 80, .8);
+}
+#homeJumbo > div.overlay {
+position: absolute;
+height: 183px;
+width: 100%;
+background: rgba(44, 62, 80, .8);
+}
+#homeJumbo h1 {
+font-size: 30px;
+color: white;
+font-family: 'Oswald';
+text-align: center;
+padding-top: 20px;
+font-weight: bolder;
+}
+#homeJumbo h1 > a {
+color: white;
+text-decoration: none;
+}
+
+.t10 {
+margin-top: 10px;
+}
+.t20 {
+margin-top: 20px;
+}
+.f25 {
+font-size: 25px;
+}
+
+
+.nav>li>a:hover, .nav>li>a:focus {
+background: rgba(0, 0, 0, .4);
+}
+.nav-pills>li+li {
+padding-left: 10px;
+}
+.text-bold {
+font-weight: bolder !important;
+}
+.lean-h {
+margin-top: 5px;
+margin-bottom: 10px;
+font-weight: bolder;
+}
+.text-black {
+color: black !important;
+}
+.text-white {
+color: white !important;
+}
+footer {
+margin-top: 20px;
+color: black;
+margin-bottom: 20px;
+
+}
+
+.navbar {
+    background-color: green; /* Green background */
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+}
+
+.nav-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-grow: 1;
+}
+
+.nav-item {
+    margin-right: 5px; /* Reduced margin */
+}
+
+.nav-item a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.nav-item a:hover {
+    background-color: #45a049; /* Darker green on hover */
+}
+
+.button-container {
+    display: flex;
+    align-items: center;
+    margin-left: auto; /* Pushes the button container to the right */
+}
+
+.nav-button {
+    background-color: white;
+    color: green;
+    border-radius: 25px; /* Makes the buttons oval */
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    margin-left: 5px; /* Space between buttons */
+}
+
+.nav-button:hover {
+    background-color: #c9d3c9;
+    color: green;
+}
+</style>
+<body>
+
+<nav class="navbar">
+	<ul class="nav-list">
+		<li class="nav-item"><a id="about" href="/dkey2">Client Logs</a></li>
+		<li class="nav-item"><a id="calendar" href="/user_chat">Client Client</a></li>
+	</ul>
+	<div class="button-container">
+		<button class="nav-button" id="logout" href="/logout">Log Out</button>
+	</div>
+</nav>
+<div class="container-fluid" id="wrapper">
+			
+        <div class="row" id="homeJumbo">
+            <div class="overlay"></div>
+            <div class="col-lg-12">
+                <h1>
+                    <a href="{{ url_for('views.index') }}">FOOD TRACKER</a>
+                </h1>
+            </div>
+        </div>
+        <div class="row t20">
+            <div class="col-lg-4 col-lg-offset-4">
+                <ul class="nav nav-pills nav-justified">
+                  <li role="presentation" class="active">
+                      <a href="{{ url_for('views.index2') }}" title="Home">Home</a>
+                  </li>
+                </ul>
+            </div>
+        </div>
+
+		<div class="row t20">
+			<div class="col-lg-8 col-lg-offset-2">
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<h3 class="lean-h text-black">
+							<i class="glyphicon glyphicon-calendar"></i> {{ log.date.strftime('%B %d, %Y') }}
+						</h3>
+						<div class="Remaining Target Calories">
+							<h2>Remaining Target Calories: </h2>
+							<p id="target-calories">{{TARGETCALORIES3}} calories</p>
+						</div>
+							<div class="col-lg-3">
+								<h4 class="lean-h">
+									Protein: &nbsp;<strong class="f25">{{ totals['protein'] }}</strong>
+								</h4>
+							</div>
+							<div class="col-lg-3">
+								<h4 class="lean-h">
+									Carbohydrates: <strong class="f25">{{ totals['carbs'] }}</strong>
+								</h4>
+							</div>
+							<div class="col-lg-3">
+								<h4 class="lean-h">
+									Fat: <strong class="f25">{{ totals['fat'] }}</strong>
+								</h4>
+							</div>
+							<div class="col-lg-3">
+								<h4 class="lean-h">
+									Calories: <strong class="f25">{{ totals['calories'] }}</strong>
+								</h4>
+							</div>
+						</div>
+					</div>
+					<div class="table-responsive">
+						<table class="table table-striped table-hover table-bordered">
+							<thead>
+								<tr>
+									<th style="width: 5%;">#</th>
+									<th>Name</th>
+									<th style="width: 10%;">Protein</th>
+									<th style="width: 16%;">Carbohydrates</th>
+									<th style="width: 10%;">Fat</th>
+									<th style="width: 12%;">Calories</th>
+									<th style="width: 20%;">Actions</th>
+								</tr>
+							</thead>
+							<tbody>
+								{% for food in log.foods %}
+								<tr>
+									<td>{{ loop.index }}</td><td>{{ food.name }}</td><td>{{ food.proteins }}</td>
+									<td>{{ food.carbs }}</td><td>{{ food.fats }}</th><td>{{ food.calories }}</td>
+								</tr>
+								{% endfor %}
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<footer>
+			<div class="row pad">
+				<div class="col-lg-12 text-center">
+					Copyright &copy; 2017 <strong>Food Tracker</strong>
+				</div>
+			</div>
+		</footer>
+
+	</div>
+
+			<!-- jQuery -->
+			<script src="{{ url_for('static', filename='bs/js/jquery.min.js') }}"></script>
+			<!-- Bootstrap JavaScript -->
+			<script src="{{ url_for('static', filename='bs/js/bootstrap.min.js') }}"></script>
+</body>
+</html>
+ <script>
+ function updateTargetCalories() {
+	fetch('/get_target_calories')
+		.then(response => response.json())
+		.then(data => {
+			document.getElementById('target-calories').textContent = data.target_calories + ' calories';
+		})
+		.catch(error => console.error('Error fetching target calories:', error));
+}
+
+// Update target calories every 5 seconds
+setInterval(updateTargetCalories, 5000);
+
+// Initial fetch when the page loads
+document.addEventListener('DOMContentLoaded', updateTargetCalories);
+</script>
